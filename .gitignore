@@ -102,3 +102,21 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# Vagrant
+.vagrant
+
+# Ansible
+.ansible
+playbook.retry
+provision/roles/ohing504.ros-installation
+
+##
+#.DS_Store
+#.bundle
+#.envrc
+#.github/
+#.idea/
+#.travis.yml
+#npm-debug.log
+#package.box
