@@ -1,0 +1,15 @@
+---
+#
+runcom: ~/.shell_config
+
+# pyenv
+pyenv_runcom: "{{ runcom }}"
+pyenv_versions:
+  - 2.7.15
+pyenv_default_versions:
+  - 2.7.15
+pyenv_project_versions:
+  - 2.7.15
+
+# ros
+ros_runcom: "{{ runcom }}"
