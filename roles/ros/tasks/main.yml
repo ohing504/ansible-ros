@@ -1,0 +1,15 @@
+---
+- include: ros.yml
+
+- name: "Insert/Update ROS configuration in {{ ros_runcom }}"
+  blockinfile:
+    path: "{{ ros_runcom }}"
+    block: "{{ lookup('template', 'templates/ros.j2') }}"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK ROS"
+    state: present
+    create: true
+    insertafter: EOF
+
+- name: "Reload {{ ros_runcom }}"
+  shell: ". {{ ros_runcom }}"
+  changed_when: false
