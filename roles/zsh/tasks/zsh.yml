@@ -1,0 +1,3 @@
+---
+- include: debian/zsh.yml
+  when: ansible_os_family == 'Debian'

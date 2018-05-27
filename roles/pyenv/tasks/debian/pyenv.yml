@@ -1,0 +1,29 @@
+---
+- name: Install requirements
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+    cache_valid_time: 86400 # One day
+  with_items:
+    - git
+    - make
+    - build-essential
+    - libssl-dev
+    - zlib1g-dev
+    - libbz2-dev
+    - libreadline-dev
+    - libsqlite3-dev
+    - wget
+    - curl
+    - llvm
+    - libncurses5-dev
+    - libncursesw5-dev
+    - xz-utils
+    - tk-dev
+
+- name: Install
+  git:
+    repo: "{{ pyenv_git_repo }}"
+    dest: "{{ pyenv_root }}"

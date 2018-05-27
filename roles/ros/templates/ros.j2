@@ -1,0 +1,6 @@
+source /opt/ros/{{ ros_distro }}/setup.{{ ros_shell }}
+[ -f /Users/ohing/.travis/travis.sh ] && source /Users/ohing/.travis/travis.sh
+
+alias cw='cd {{ ros_catkin_workspace }}'
+alias cs='cd {{ ros_catkin_workspace }}/src'
+alias cm='cd {{ ros_catkin_workspace }} && catkin_make && source {{ ros_catkin_workspace }}/devel/setup.{{ ros_shell }}'

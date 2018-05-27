@@ -1,0 +1,38 @@
+---
+- name: Add ROS 2 repository key by id from a keyserver
+  apt_key:
+    url: "{{ ros2_repo_key_url }}"
+    state: present
+
+- name: Add ROS 2 repository into sources list
+  apt_repository:
+    repo: "{{ ros2_repo }}"
+    state: present
+
+- name: Resynchronize the package index files from their sources
+  apt:
+    update_cache: yes
+
+- name: Get ROS 2 packages list
+  shell: 'apt list "ros-ardent-*" 2> /dev/null | grep "/" | awk -F/ ''{print $1}'' | grep -v -e ros-ardent-ros1-bridge -e ros-ardent-turtlebot2- | tr "\n" " "'
+  register: ros2_packages_full
+
+- name: Separate packages list
+  set_fact: ros2_packages="{{ ros2_packages_full.stdout.split(' ') | difference(['']) }}"
+
+- name: Install desired ROS 2 package
+  apt: "pkg={{ item }} state=latest"
+  with_items:
+    - "{{ ros2_packages }}"
+  tags:
+    - ros2
+
+- name: "Insert/Update ros 2 configuration in bashrc"
+  lineinfile:
+    path: "{{ pyenv_runcom }}"
+    block: "{{ lookup('template', 'templates/pyenv.j2') }}"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK PYENV"
+    state: present
+    backup: yes
+    insertafter: EOF
+    create: true

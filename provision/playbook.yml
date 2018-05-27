@@ -1,0 +1,97 @@
+---
+- name: Install Python
+  hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Install Python 2.x
+      raw: test -e /usr/bin/python || (apt update && apt install -y python-simplejson)
+      register: test
+      changed_when: test.stdout
+
+# - name: Install Python3
+#   hosts: all
+#   become: true
+#   tasks:
+#     - name: Install Python 3.x
+#       apt: "pkg={{ item }} state=latest"
+#       with_items:
+#         - python3
+#         - python3-venv
+#         - python3-dev
+#         - build-essential
+#       tags:
+#         - python3
+
+- hosts: all
+  tasks:
+    - name: Update apt packages
+      become: true
+      apt:
+        upgrade: false
+        update_cache: yes
+        cache_valid_time: 86400 #One day
+    - name: Install requirements packages
+      become: true
+      apt: "pkg={{ item }} state=latest"
+      with_items:
+        - make
+        - build-essential
+        - libssl-dev
+        - zlib1g-dev
+        - libbz2-dev
+        - libreadline-dev
+        - libsqlite3-dev
+        - wget
+        - curl
+        - llvm
+        - libncurses5-dev
+        - libncursesw5-dev
+        - xz-utils
+        - tk-dev
+
+    # Setup bash
+    - name: Place a ~/.bash_profile
+      become: false
+      template:
+        src: templates/.bash_profile
+        dest: "{{ ansible_env.HOME }}/.bash_profile"
+    - name: Place a ~/.bash.d/
+      become: false
+      file:
+        path: "{{ ansible_env.HOME }}/.bash.d"
+        state: directory
+
+- name: Install Python3 via pyenv
+  hosts: all
+  become: false
+  tasks:
+    - include_vars:
+        file: default.yml
+        name: default
+    - name: Get pyenv from git
+      git:
+        repo: "https://github.com/pyenv/pyenv.git"
+        dest: "{{ ansible_env.HOME }}/.pyenv"
+    - name: Place a ~/.bash.d/pyenv.sh
+      become: false
+      template:
+        src: templates/pyenv.sh
+        dest: "{{ ansible_env.HOME }}/.bash.d/pyenv.sh"
+    - name: Reload .bash_profile
+      shell: "source {{ ansible_env.HOME }}/.bash_profile"
+      args:
+        executable: /bin/bash
+      changed_when: false
+    - stat:
+        path: "{{ ansible_env.HOME }}/.pyenv/versions/{{ default.python_version }}"
+      register: st
+    - name: "Install python {{ default.python_version }}"
+      command: "pyenv install {{ default.python_version }}"
+      when: not st.stat.exists
+    - name: Set pyenv local and global using python3
+      command: "{{ item }}"
+      remote_user: "{{ ansible_env.USER | default( 'ubuntu' ) }}"
+      with_items:
+        - "pyenv global {{ default.python_version }}"
+        - "pyenv local {{ default.python_version }}"

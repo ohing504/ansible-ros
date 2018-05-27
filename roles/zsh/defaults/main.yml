@@ -1,0 +1,5 @@
+---
+ohmyzsh_backup: true
+ohmyzsh_theme: "ohing"
+ohmyzsh_plugins:
+  - git

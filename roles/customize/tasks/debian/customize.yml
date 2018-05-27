@@ -1,0 +1,7 @@
+---
+- name: Install packages
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ customize_apt_packages }}"

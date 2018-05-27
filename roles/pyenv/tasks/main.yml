@@ -1,0 +1,33 @@
+---
+- include: pyenv.yml
+
+- name: "Insert/Update pyenv configuration in {{ pyenv_runcom }}"
+  blockinfile:
+    path: "{{ pyenv_runcom }}"
+    block: "{{ lookup('template', 'templates/pyenv.j2') }}"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK PYENV"
+    state: present
+    create: true
+    insertafter: EOF
+
+- name: "Reload {{ pyenv_runcom }}"
+  shell: "{{ pyenv_shell }} {{ pyenv_runcom }}"
+  changed_when: false
+
+- name: Install versions
+  command: creates={{ pyenv_root }}/versions/{{ item }} {{ pyenv_root }}/bin/pyenv install {{ item }}
+  with_items: "{{ pyenv_versions }}"
+
+- name: Set pyenv default versions
+  vars:
+    versions: "{{ pyenv_default_versions }}"
+  template:
+    src: templates/versions.j2
+    dest:  "{{ pyenv_root }}/version"
+
+- name: Set pyenv project versions
+  vars:
+    versions: "{{ pyenv_project_versions }}"
+  template:
+    src: templates/versions.j2
+    dest:  "{{ pyenv_project_root }}/.python-version"

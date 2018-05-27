@@ -1,0 +1,48 @@
+---
+- name: Install requirements
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: latest
+    install_recommends: no
+    update_cache: yes
+    cache_valid_time: 86400 # One day
+  with_items:
+    - git
+    - zsh
+
+- name: Clone the repository
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh"
+  register: cloning
+
+- name: Check if .zshrc exists
+  stat:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+  register: zshrc
+
+- name: Back up existing .zshrc file if it exists
+  when: zshrc.stat.exists and ohmyzsh_backup
+  copy:
+    remote_src: true
+    src: "{{ ansible_env.HOME }}/.zshrc"
+    dest: "{{ ansible_env.HOME }}/.zshrc-orig"
+
+- name: Create a new zsh configuration file
+  become: false
+  template:
+    src: templates/zshrc.j2
+    dest: "{{ ansible_env.HOME }}/.zshrc"
+  when: cloning is success
+
+- name: Copy custom zsh theme file
+  copy:
+    src: files/themes/
+    dest: "{{ ansible_env.HOME}}/.oh-my-zsh/themes"
+
+- name: Change your default shell
+  become: true
+  user:
+    name: "{{ ansible_env.USER }}"
+    shell: /usr/bin/zsh

@@ -1,0 +1,45 @@
+---
+- name: Install dependencies (apt)
+  become: yes
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - ca-certificates
+    - apt-transport-https
+
+- name: Install key (apt)
+  become: yes
+  apt_key:
+    url: "https://packages.microsoft.com/keys/microsoft.asc"
+    state: present
+
+- name: Add VS Code repo (apt)
+  become: yes
+  apt_repository:
+    repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+    filename: vscode
+    state: present
+    update_cache: yes
+
+- name: Install VS Code (apt)
+  become: yes
+  apt:
+    name: code
+    state: present
+    update_cache: true
+  when: vscode_install
+
+- name: Install VS Code insiders (apt)
+  become: yes
+  apt:
+    name: code-insiders
+    state: present
+    update_cache: true
+  when:
+    - vscode_insiders_install
+
+- name: Install VS Code Extensions
+  become: no
+  command: "code --install-extension {{ item }}"
+  with_items: "{{ vscode_extensions }}"

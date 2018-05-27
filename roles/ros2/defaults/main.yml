@@ -1,0 +1,3 @@
+---
+ros2_repo: "deb [arch=amd64,arm64] http://repo.ros2.org/ubuntu/main xenial main"
+ros2_repo_key_url: "http://repo.ros2.org/repos.key"

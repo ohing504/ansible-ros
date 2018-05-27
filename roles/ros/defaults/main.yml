@@ -1,0 +1,14 @@
+---
+ros_repo: "http://packages.ros.org/ros/ubuntu"
+ros_keyserver: "hkp://ha.pool.sks-keyservers.net:80"
+ros_keyid: "421C365BD9FF1F717815A3895523BAEEB01FA116"
+
+ros_distro: "kinetic"
+ros_package: "desktop-full" # (desktop-full, desktop, ros-base)
+
+ros_install_dependencies: true
+
+ros_shell: bash
+ros_runcom: ~/.bashrc
+
+ros_catkin_workspace: "~/catkin_ws"
