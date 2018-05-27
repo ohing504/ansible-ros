@@ -1,15 +1,13 @@
 ---
-- name: Update apt packages
-  become: true
-  apt:
-    upgrade: false
-    update_cache: yes
-    cache_valid_time: 86400 #One day
-
 - name: Install requirements
   become: true
-  apt: pkg={{ item }} state=present
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+    cache_valid_time: 86400 # One day
   with_items:
+    - git
     - make
     - build-essential
     - libssl-dev

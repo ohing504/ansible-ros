@@ -1,0 +1,4 @@
+[server]
+ubuntu ansible_host=10.211.55.6 ansible_port=22 ansible_user=ohing ansible_connection=ssh
+
+[server:vars]

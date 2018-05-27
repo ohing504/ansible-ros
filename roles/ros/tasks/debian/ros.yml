@@ -16,7 +16,7 @@
 
 - name: Install desired ROS package
   apt:
-    name: "ros-{{ ros_release }}-{{ ros_package }}"
+    name: "ros-{{ ros_distro }}-{{ ros_package }}"
     state: present
 
 - name: Check the rosdep is initialized

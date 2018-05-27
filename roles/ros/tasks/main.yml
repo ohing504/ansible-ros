@@ -11,5 +11,5 @@
     insertafter: EOF
 
 - name: "Reload {{ ros_runcom }}"
-  shell: ". {{ ros_runcom }}"
+  shell: "{{ ros_shell }} {{ ros_runcom }}"
   changed_when: false

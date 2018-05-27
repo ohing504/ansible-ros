@@ -13,7 +13,7 @@ None
 
 Available variables are listed below, along with default values:
 
-    ros_installation_ros_release: "kinetic"
+    ros_installation_ros_distro: "kinetic"
     ros_installation_ros_package: "desktop-full"
     ros_installation_ros_repository: "http://packages.ros.org/ros/ubuntu"
     ros_installation_ros_keyserver: "hkp://ha.pool.sks-keyservers.net:80"

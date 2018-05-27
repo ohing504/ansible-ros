@@ -4,6 +4,7 @@ pyenv_git_repo: https://github.com/pyenv/pyenv.git
 pyenv_root: ~/.pyenv
 pyenv_project_root: '~'
 
+pyenv_shell: /bin/bash
 pyenv_runcom: ~/.bashrc
 
 pyenv_versions: []

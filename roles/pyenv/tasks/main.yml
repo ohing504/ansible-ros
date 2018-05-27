@@ -11,7 +11,7 @@
     insertafter: EOF
 
 - name: "Reload {{ pyenv_runcom }}"
-  shell: ". {{ pyenv_runcom }}"
+  shell: "{{ pyenv_shell }} {{ pyenv_runcom }}"
   changed_when: false
 
 - name: Install versions

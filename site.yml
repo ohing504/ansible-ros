@@ -8,4 +8,4 @@
       register: test
       changed_when: test.stdout
 
-- import_playbook: nodes.yml
+- import_playbook: setup.yml

@@ -1,9 +1,20 @@
 ---
 #
-runcom: ~/.shell_config
+shell: zsh
+runcom: ~/.zshrc
+
+# zsh
+ohmyzsh_users:
+  - username: ohing
+  - username: root
+ohmyzsh_plugins:
+  - git
+  - pyenv
+  - python
 
 # pyenv
 pyenv_runcom: "{{ runcom }}"
+pyenv_shell: "{{ shell }}"
 pyenv_versions:
   - 2.7.15
 pyenv_default_versions:
@@ -13,3 +24,16 @@ pyenv_project_versions:
 
 # ros
 ros_runcom: "{{ runcom }}"
+ros_shell: "{{ shell }}"
+ros_catkin_workspace: "~/catkin_ws"
+
+# customize
+customize_apt_packages:
+  - terminator
+  - pylint
+
+# vscode
+vscode_extensions:
+  - ajshort.ros       # ROS
+  - ms-python.python  # Python
+  - tht13.python      # Python for VSCode
