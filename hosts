@@ -1,4 +1,7 @@
-[server]
+[all:vars]
+env=development
+
+[rosservers]
 ubuntu ansible_host=10.211.55.6 ansible_port=22 ansible_user=ubuntu ansible_connection=ssh
 
-[server:vars]
+[rosserver:vars]

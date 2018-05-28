@@ -1,4 +1,9 @@
 ---
+git_repo: 
+
+project_name: zstt-ros
+application_name: zstt-ros
+
 #
 shell: zsh
 runcom: ~/.zshrc
