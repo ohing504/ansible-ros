@@ -1,122 +1,83 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
-
-# C extensions
-*.so
-
-# Distribution / packaging
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
-.pytest_cache/
-
-# Translations
-*.mo
-*.pot
-
-# Django stuff:
 *.log
-local_settings.py
-db.sqlite3
 
-# Flask stuff:
-instance/
-.webassets-cache
+# Created by https://www.gitignore.io/api/code,linux,macos,ansible,windows,vagrant
 
-# Scrapy stuff:
-.scrapy
+### Ansible ###
+*.retry
 
-# Sphinx documentation
-docs/_build/
+### Code ###
+# Visual Studio Code - https://code.visualstudio.com/
+.settings/
+.vscode/
+tsconfig.json
+jsconfig.json
 
-# PyBuilder
-target/
+### Linux ###
+*~
 
-# Jupyter Notebook
-.ipynb_checkpoints
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
 
-# pyenv
-.python-version
+# KDE directory preferences
+.directory
 
-# celery beat schedule file
-celerybeat-schedule
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
 
-# SageMath parsed files
-*.sage.py
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
 
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+### macOS ###
+*.DS_Store
+.AppleDouble
+.LSOverride
 
-# Spyder project settings
-.spyderproject
-.spyproject
+# Icon must end with two \r
+Icon
 
-# Rope project settings
-.ropeproject
+# Thumbnails
+._*
 
-# mkdocs documentation
-/site
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
 
-# mypy
-.mypy_cache/
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
 
-# Vagrant
-.vagrant
+### Vagrant ###
+.vagrant/
+*.box
 
-# Ansible
-.ansible
-playbook.retry
-provision/roles/ohing504.ros-installation
+### Windows ###
+# Windows thumbnail cache files
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
 
-##
-#.DS_Store
-#.bundle
-#.envrc
-#.github/
-#.idea/
-#.travis.yml
-#npm-debug.log
-#package.box
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+
+# End of https://www.gitignore.io/api/code,linux,macos,ansible,windows,vagrant
